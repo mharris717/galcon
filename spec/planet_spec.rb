@@ -35,7 +35,6 @@ describe "Galcon" do
     end
     
     describe "attack" do
-      
       describe 'not enough' do
         let(:fleet) do
           Galcon::Fleet.new(:player => :blue, :ship_count => 5)

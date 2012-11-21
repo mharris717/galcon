@@ -80,6 +80,10 @@ module Galcon
       # x**2 = x_frac2 / (1 + x_frac2)
       # x = (x_frac2 / (1 + x_frac2))**0.5
     end
+    
+    def eq?(c)
+      c.x == x && c.y == y
+    end
   end
 end
 
