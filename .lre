@@ -1,0 +1,6 @@
+LRE.watch(".*") do
+  require 'pty'
+  puts PTY.spawn('bundle exec rake spec')[0].read
+end
+
+puts "in lre"
