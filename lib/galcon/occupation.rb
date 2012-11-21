@@ -5,7 +5,7 @@ module Galcon
     def size; ship_count; end
     
     def grow!
-      self.ship_count += planet.growth_rate
+      self.ship_count += planet.growth_rate if player
     end
     
     def add(fleet)

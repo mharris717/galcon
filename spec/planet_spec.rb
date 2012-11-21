@@ -1,6 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Galcon" do
+  describe 'unowned' do
+    let(:planet) do
+      Galcon::Planet.new(:growth_rate => 5, :ship_count => 10)
+    end
+    before do
+      planet.occupation.grow!
+    end
+    it 'doesnt grow' do
+      planet.ship_count.should == 10
+    end
+  end
+  
   describe "growth" do
     let(:planet) do
       Galcon::Planet.new(:growth_rate => 5, :player => :red, :ship_count => 10)
