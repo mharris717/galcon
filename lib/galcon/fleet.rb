@@ -9,5 +9,9 @@ module Galcon
     def goto(planet)
       self.mission = Mission.new(:target => planet, :fleet => self)
     end
+    
+    def to_s
+      "#{player}:#{size} #{loc} -> #{mission.target.loc}"
+    end
   end
 end

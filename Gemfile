@@ -14,3 +14,6 @@ group :development do
 end
 
 gem 'mharris_ext'
+gem 'lre'
+
+gem 'ruby-prof'

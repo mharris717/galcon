@@ -11,6 +11,10 @@ GEM
       rake
       rdoc
     json (1.7.5)
+    lre (0.3.0)
+      fattr
+      mharris_ext
+      watchr
     mharris_ext (1.6.0)
       facets
       fattr
@@ -25,6 +29,8 @@ GEM
     rspec-expectations (2.8.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
+    ruby-prof (0.11.2)
+    watchr (0.7)
 
 PLATFORMS
   ruby
@@ -32,6 +38,8 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.2)
   jeweler (~> 1.8.4)
+  lre
   mharris_ext
   rdoc (~> 3.12)
   rspec (~> 2.8.0)
+  ruby-prof

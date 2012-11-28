@@ -24,24 +24,32 @@ module Galcon
     end
     
     def move_toward(c)
+      exist = move_toward_cache[c]
+      return exist if exist
+      res = move_toward_calc(c)
+      move_toward_cache[c] = res
+      res
+    end
+    
+    def move_toward_calc(c)
       if x == c.x && y == c.y
         raise "same"
-      end
-      
-      if x == c.x
+      elsif x == c.x
         sign = (c.y > y) ? 1 : -1
         [x,y+sign].to_cord
       elsif y == c.y
         sign = (c.x > x) ? 1 : -1
         [x+sign,y].to_cord
+      elsif dist(c) <= 1
+        c
       else
-        move_toward_inner(c)
+        move_toward_calc_inner(c)
       end
     end
 
       
     
-    def move_toward_inner(c)
+    def move_toward_calc_inner(c)
       x_diff = (x - c.x).abs
       y_diff = (y - c.y).abs
       
@@ -60,10 +68,10 @@ module Galcon
       x_sign = (c.x > x) ? 1 : -1
       y_sign = (c.y > y) ? 1 : -1
       
-      %w(x y c.x c.y x_diff y_diff x_perc y_perc).each do |name|
-        val = eval(name)
+      #%w(x y c.x c.y x_diff y_diff x_perc y_perc).each do |name|
+        #val = eval(name)
         #puts "#{name}: #{val}"
-      end
+      #end
       
       res = klass.new
       res.x = x + (x_frac2 / (1 + x_frac2))**0.5 * x_sign
@@ -84,11 +92,26 @@ module Galcon
     def eq?(c)
       c.x == x && c.y == y
     end
+    
+    fattr(:move_toward_cache) { {} }
+    
+    class << self
+      fattr(:cache) do
+        Hash.new { |h,k| h[k] = new(:x => k[0], :y => k[1]) }
+      end
+      def get(x,y)
+        cache[[x,y]]
+      end
+    end
+    
+    def <=>(c)
+      [x,y] <=> [c.x,c.y]
+    end
   end
 end
 
 class Array
   def to_cord
-    Galcon::Cord.new(:x => self[0], :y => self[1])
+    Galcon::Cord.get(self[0],self[1])
   end
 end

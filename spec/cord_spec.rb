@@ -100,6 +100,24 @@ describe "Galcon" do
         first_move.y.should == 2
       end
     end
+    
+    describe 'partial' do
+      let(:start) { [2,2].to_cord }
+      let(:finish) { [3,3].to_cord }
+      let(:first_move) do
+        start.move_toward(finish).move_toward(finish)
+      end
+      
+      it 'dist' do
+        start.dist(finish).should == 2**0.5
+      end
+      it 'x' do
+        first_move.x.should == 3
+      end
+      it 'y' do
+        first_move.y.should == 3
+      end
+    end
   end
 end
 

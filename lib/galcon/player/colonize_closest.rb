@@ -1,15 +1,30 @@
 module Galcon
   module Player
     class ColonizeClosest < Base
+      fattr(:frac) { 1 }
       def calc_moves
         my_planets.map do |planet|
-          target = closest_unowned(planet)
-          target ? Move.new(:source => planet, :target => target, :size => planet.ship_count) : nil
+          target = best_target(planet)
+          s = (planet.ship_count.to_f*frac).to_i
+          target ? Move.new(:source => planet, :target => target, :size => s) : nil
         end.select { |x| x }
       end
+
       def closest_unowned(planet)
-        unowned = world.planets.reject { |x| x.player }
-        unowned.sort_by { |x| x.dist(planet) }.first
+        world.planets.closest(planet,:player => nil)
+      end
+      def closest_enemy(planet)
+        world.planets.closest(planet, :player => :enemy)
+      end
+      
+      def best_target(planet)
+        closest_unowned(planet) || closest_enemy(planet)
+      end
+    end
+    
+    class ColonizeClosestSmart < ColonizeClosest
+      def suitable?(planet)
+        planet.growth_rate >= 5
       end
     end
   end

@@ -71,5 +71,23 @@ describe "Galcon" do
         planets[1].ship_count.should == 40
       end
     end
+    
+    describe 'five ticks' do
+      before do
+        5.times { world.advance! }
+      end
+      it 'fleet count' do
+        world.fleets.size.should == 0
+      end
+      it 'source size' do
+        planets[0].ship_count.should == 30
+      end
+      it 'colonized planet' do
+        planets[1].player.should == :red
+      end
+      it 'target ship count' do
+        planets[1].ship_count.should == 70
+      end
+    end
   end
 end

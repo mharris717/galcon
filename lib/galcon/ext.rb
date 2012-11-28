@@ -21,3 +21,12 @@ class Object
     def_delegator :self, "#{existing}=","#{new_meth}=" 
   end
 end
+
+class Array
+  def sum
+    inject(0) do |s,i|
+      raise "bad sum array" if i.nil?
+      s + i
+    end
+  end
+end

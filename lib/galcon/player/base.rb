@@ -4,7 +4,10 @@ module Galcon
       include FromHash
       attr_accessor :player, :world
       def my_planets
-        world.planets.select { |x| x.player == player }
+        world.planets.list(:player => player)
+      end
+      def my_fleets
+        world.fleets.list(:player => player)
       end
     end
   end
