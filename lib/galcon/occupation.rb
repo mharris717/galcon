@@ -35,5 +35,9 @@ module Galcon
       res.goto target
       res
     end
+    
+    def clone
+      klass.new(:player => player, :ship_count => ship_count)
+    end
   end
 end

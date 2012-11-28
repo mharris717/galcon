@@ -1,12 +1,14 @@
+
+
 LRE.watch("lib/.*") do |f|
   load f
-  require 'pty'
-  puts PTY.spawn('bundle exec rake spec')[0].read
+  run_specs!(f)
 end
 
-LRE.watch("spec/.*") do
-  require 'pty'
-  puts PTY.spawn('bundle exec rake spec')[0].read
+LRE.watch("spec/.*") do |f|
+  load f
+  run_specs!(f)
 end
 
 load "lib/galcon.rb"
+load "lib/run_specs.rb"

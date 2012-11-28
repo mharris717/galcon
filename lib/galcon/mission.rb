@@ -15,5 +15,9 @@ module Galcon
     def reach_target!
       target.occupation.add fleet
     end
+    
+    def clone
+      klass.new(:target => target)
+    end
   end
 end

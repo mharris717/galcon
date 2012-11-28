@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/sporkrb/spork.git
+  revision: 8ac98544869c3b4c5cf1f664b2d9281bb75c7e3e
+  specs:
+    spork (1.0.0rc3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -43,3 +49,4 @@ DEPENDENCIES
   rdoc (~> 3.12)
   rspec (~> 2.8.0)
   ruby-prof
+  spork!

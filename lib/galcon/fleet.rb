@@ -13,5 +13,18 @@ module Galcon
     def to_s
       "#{player}:#{size} #{loc} -> #{mission.target.loc}"
     end
+    
+    def clone
+      res = klass.new(:player => player, :ship_count => ship_count, :loc => loc)
+      if mission
+        res.mission = mission.clone
+        res.mission.fleet = res
+      end
+      res
+    end
   end
+end
+
+def return_two
+  2
 end

@@ -1,0 +1,1 @@
+Dir["spec/**/*_spec.rb"].each { |x| load x }

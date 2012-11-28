@@ -12,5 +12,14 @@ module Galcon
     def <=>(x)
       loc <=> x.loc
     end
+    
+    def clone
+      res = klass.new(:growth_rate => growth_rate, :location => location)
+      if occupation
+        res.occupation = occupation.clone
+        res.occupation.planet = res
+      end
+      res
+    end
   end
 end

@@ -131,6 +131,12 @@ describe "Fleet" do
       it 'switches owner' do
         target.player.should == :blue
       end
+      
+      it 'fails' do
+        return_two.should == 2
+      end
     end
   end
+  
+  
 end
