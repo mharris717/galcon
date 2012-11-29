@@ -1,5 +1,10 @@
 module Galcon
   class Planets
+    class UnknownPlayerTypeError < RuntimeError
+      include FromHash
+      attr_accessor :player
+    end
+    
     include FromHash
     fattr(:planets) { [] }
     
@@ -58,7 +63,7 @@ module Galcon
           enemies = players - [base] + [nil]
           enemies.map { |x| by_player[x] }.flatten
         else
-          raise 'foo'
+          raise UnknownPlayerTypeError.new(:player => ops[:player])
         end
       else
         by_player[ops[:player]]

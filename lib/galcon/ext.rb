@@ -22,14 +22,7 @@ class Object
   end
 end
 
-class Array
-  def sum
-    inject(0) do |s,i|
-      raise "bad sum array" if i.nil?
-      s + i
-    end
-  end
-end
+
 
 class Numeric
   def round_up

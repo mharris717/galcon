@@ -60,26 +60,16 @@ module Galcon
     end
     
     def winner
-      active_players.first
+      active_players.tap { |arr| raise "no winner" unless arr.size == 1 }.first
     end
     
-    def run!(n=nil)
-      if n
-        n.times do
-          advance!
-        end
-      else
-        i = 0
-        while active?
-          advance!
-          i += 1
-          raise "end" if i > 200
-        end
-        puts "Last turn #{i} #{winner}"
-      end
+    fattr(:runner) { Runner::Printing.new(:world => self) }
+    
+    def run!(*args)
+      runner.run!(*args)
     end
     
-    
+
   end
   
 end

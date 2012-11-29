@@ -1,6 +1,5 @@
 def fresh_world(grid_size,num_planets)
   world = Galcon::World.new
-  world = Galcon::PrintingWorld.new(:world => world)
   
   random_cords = lambda do |num|
     cords = []

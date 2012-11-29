@@ -166,5 +166,11 @@ describe "Future" do
     end
   end
   
+  describe "error" do
+    it 'errors without turns' do
+      lambda { future.planet(target) }.should raise_error(Galcon::Strategy::Future::UnknownTurnsError)
+    end
+  end
+  
 
 end

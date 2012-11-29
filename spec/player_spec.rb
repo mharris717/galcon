@@ -46,6 +46,9 @@ describe "Galcon" do
       it 'fleet count' do
         world.fleets.size.should == 1
       end
+      it 'player fleet count' do
+        player.my_fleets.size.should == 1
+      end
       it 'fleet size' do
         fleet.size.should == 50
       end

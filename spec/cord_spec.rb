@@ -17,6 +17,10 @@ describe "Galcon" do
     start.dist(finish).should == exp
   end
   
+  it 'to_cord returns self' do
+    start.to_cord.should == start
+  end
+  
   describe 'moving' do
     let(:perc_per) { 1.0/(45**0.5) }
     describe 'forward' do

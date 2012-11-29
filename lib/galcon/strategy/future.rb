@@ -1,6 +1,9 @@
 module Galcon
   module Strategy
     class Future
+      class UnknownTurnsError < RuntimeError
+      end
+      
       include FromHash
       extend Forwardable
       attr_accessor :world
@@ -27,7 +30,7 @@ module Galcon
         elsif ops[:source]
           ops[:source].loc.dist(planet.loc).round_up
         else
-          raise "unknown turns"
+          raise UnknownTurnsError.new
         end
       end
       

@@ -63,6 +63,10 @@ describe "Planets" do
       planets.list(:player => [:not_mine, :red]).sort.size.should == raw_planets.select { |x| x.player != :red }.sort.size
       planets.list(:player => [:not_mine, :red]).sort.should == raw_planets.select { |x| x.player != :red }.sort
     end
+    
+    it 'errors on bad player' do
+      lambda { planets.list(:player => [:fancy, :red]) }.should raise_error(Galcon::Planets::UnknownPlayerTypeError)
+    end
   end
   
 end
