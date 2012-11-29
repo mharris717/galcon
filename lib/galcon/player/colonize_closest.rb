@@ -21,11 +21,6 @@ module Galcon
         closest_unowned(planet) || closest_enemy(planet)
       end
     end
-    
-    class ColonizeClosestSmart < ColonizeClosest
-      def suitable?(planet)
-        planet.growth_rate >= 5
-      end
-    end
   end
 end
+

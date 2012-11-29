@@ -1,5 +1,13 @@
 module Galcon
   class Cord
+    
+    class SameLocError < RuntimeError
+      attr_accessor :loc
+      def initialize(loc)
+        @loc = loc
+      end
+    end
+    
     include FromHash
     attr_accessor :x, :y
     
@@ -33,7 +41,7 @@ module Galcon
     
     def move_toward_calc(c)
       if x == c.x && y == c.y
-        raise "same"
+        raise SameLocError.new(self)
       elsif x == c.x
         sign = (c.y > y) ? 1 : -1
         [x,y+sign].to_cord

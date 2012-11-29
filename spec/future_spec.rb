@@ -28,9 +28,10 @@ describe "Future" do
   let(:source) { world.planets.planets[0] }
   let(:target) { world.planets.planets[1] }
   let(:other) { world.planets.planets[2] }
+  let(:attack) { true }
   
   before do
-    world.move source,target,fleet_size
+    world.move(source,target,fleet_size) if attack
     world.advance!
   end
   
@@ -127,6 +128,40 @@ describe "Future" do
         future.planet_size(target, :turns => 10).should == 35
         future.planet(target, :turns => 10).ship_count.should == 35
         future.planet(target, :turns => 10).player.should == :red
+      end
+    end
+  end
+  
+  describe "attacking enemy planet - winning - turns based on fleet" do
+    let(:fleet_size) { 80 }
+    let(:target_owner) { :blue }
+  
+    describe "one turn in" do
+      it 'when reach' do
+        future.planet_size(target, :fleet => world.fleets.first).should == 20
+      end
+    end
+  end
+  
+  describe "check far planet" do
+    let(:fleet_size) { 80 }
+    let(:target) { world.planets.planets[3] }
+    let(:attack) { false }
+  
+    describe "one turn in" do
+      it 'when reach' do
+        future.planet_size(target, :source => source).should == 105
+      end
+    end
+  end
+  
+  describe "check far planet" do
+    let(:fleet_size) { 80 }
+    let(:target) { world.planets.planets[3] }
+  
+    describe "one turn in" do
+      it 'when reach' do
+        future.planet_size(target, :source => source).should == 25
       end
     end
   end

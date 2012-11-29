@@ -19,3 +19,5 @@ gem 'lre'
 gem 'ruby-prof'
 
 gem "spork", :git => "https://github.com/sporkrb/spork.git"
+
+gem 'simplecov', :require => false, :group => :test

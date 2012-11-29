@@ -2,11 +2,15 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Fleet" do
   let(:fleet) do
-    Galcon::Fleet.new(:player => fleet_owner, :size => fleet_size, :loc => [0,0].to_cord)
+    Galcon::Fleet.new(:player => fleet_owner, :size => fleet_size, :loc => [0,0].to_cord, :source => source)
+  end
+  let(:source) do
+    Galcon::Planet.new(:loc => [0,0].to_cord, :player => :red)
   end
   let(:target) do
-    Galcon::Planet.new(:loc => [3,0].to_cord, :ship_count => 20, :player => target_owner)
+    Galcon::Planet.new(:loc => target_loc.to_cord, :ship_count => 20, :player => target_owner)
   end
+  let(:target_loc) { [3,0] }
   let(:target_owner) { :red }
   let(:fleet_size) { 10 }
   
@@ -135,6 +139,17 @@ describe "Fleet" do
       it 'fails' do
         return_two.should == 2
       end
+    end
+  end
+  
+  describe "goto current loc" do
+    let(:target_loc) { [0,0] }
+    let(:fleet_owner) { :blue }
+    it 'should error' do
+      lambda { fleet.mission.advance! }.should raise_error(Galcon::Mission::BadAdvanceError,/advance/i)
+    end
+    it 'to_s' do
+      fleet.to_s.should be
     end
   end
   

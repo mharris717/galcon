@@ -30,3 +30,9 @@ class Array
     end
   end
 end
+
+class Numeric
+  def round_up
+    (to_f + 0.999).to_i
+  end
+end

@@ -31,7 +31,7 @@ module Galcon
     
     def fleet_to(target,size)
       self.ship_count -= size
-      res = Fleet.new(:player => player, :size => size, :loc => planet.loc)
+      res = Fleet.new(:player => player, :size => size, :loc => planet.loc, :source => planet)
       res.goto target
       res
     end

@@ -2,7 +2,7 @@ module Galcon
   class Fleet
     include FromHash
     attr_accessor :player, :ship_count
-    attr_accessor :mission, :loc
+    attr_accessor :mission, :loc, :source
     
     copy_method :ship_count, :size
     
@@ -15,7 +15,7 @@ module Galcon
     end
     
     def clone
-      res = klass.new(:player => player, :ship_count => ship_count, :loc => loc)
+      res = klass.new(:player => player, :ship_count => ship_count, :loc => loc, :source => source)
       if mission
         res.mission = mission.clone
         res.mission.fleet = res
